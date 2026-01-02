@@ -30,6 +30,21 @@
         }
         .features li { list-style: none; padding: 0.5rem 0; color: #ccc; }
         .features li::before { content: "✓ "; color: #4ade80; }
+        .tool-section {
+            margin: 2rem 0; padding: 1.5rem;
+            background: rgba(74, 222, 128, 0.1); border-radius: 12px;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+        .tool-section h2 { font-size: 1.2rem; margin-bottom: 0.5rem; color: #4ade80; }
+        .tool-section p { color: #aaa; font-size: 0.9rem; margin-bottom: 1rem; }
+        .bookmarklet {
+            display: inline-block; padding: 0.8rem 1.5rem;
+            background: #4ade80; color: #000; border-radius: 8px;
+            text-decoration: none; font-weight: 600;
+            cursor: grab; transition: background 0.2s;
+        }
+        .bookmarklet:hover { background: #22c55e; }
+        .instructions { font-size: 0.8rem; color: #666; margin-top: 0.5rem; }
         .cta { margin-top: 2rem; }
         .cta p { color: #888; margin-bottom: 1rem; }
         form { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
@@ -50,15 +65,23 @@
 <body>
     <div class="container">
         <h1>CloakedLink</h1>
-        <p class="tagline">Privacy-first link management. Coming soon.</p>
+        <p class="tagline">Privacy-first link management.</p>
         <div class="features">
-            <li>Strip tracking parameters from shared links</li>
-            <li>Protect affiliate commissions from hijacking</li>
-            <li>Zero-knowledge link shortening</li>
-            <li>No data sold. No tracking. Ever.</li>
+            <li>Strip tracking parameters from any URL</li>
+            <li>Remove UTM, Facebook, Google tracking codes</li>
+            <li>Works instantly in your browser</li>
+            <li>No data collected. Ever.</li>
         </div>
+        
+        <div class="tool-section">
+            <h2>Free Tool: Link Cleaner Bookmarklet</h2>
+            <p>Drag this button to your bookmarks bar:</p>
+            <a class="bookmarklet" href="javascript:(function(){const u=new URL(window.location.href);const strip=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_id','fbclid','gclid','gbraid','wbraid','msclkid','mc_cid','mc_eid','_ga','_gl','ref','ref_src','ref_url','source','pk_campaign','pk_kwd','piwik_campaign','piwik_kwd','hsa_acc','hsa_cam','hsa_grp','hsa_ad','hsa_src','hsa_tgt','hsa_kw','hsa_mt','hsa_net','hsa_ver','igshid','s_kwcid','ss_source','ss_campaign'];let removed=0;strip.forEach(p=>{if(u.searchParams.has(p)){u.searchParams.delete(p);removed++;}});if(removed>0){window.history.replaceState({},'',u.toString());alert('CloakedLink: Stripped '+removed+' tracking parameter'+(removed>1?'s':'')+'!');}else{alert('CloakedLink: No tracking parameters found.');}})();">🔗 CloakedLink</a>
+            <p class="instructions">Then click it on any page to strip tracking parameters.</p>
+        </div>
+
         <div class="cta">
-            <p>Get notified when we launch:</p>
+            <p>Get notified about the browser extension:</p>
             <form action="https://cloakedlink.us7.list-manage.com/subscribe/post?u=a9ca8634466ce15ec8bfeb496&amp;id=7e1d2f476b&amp;f_id=00313ee0f0" method="post" target="_blank">
                 <input type="email" name="EMAIL" placeholder="you@example.com" required>
                 <div style="position: absolute; left: -5000px;" aria-hidden="true">
@@ -66,7 +89,7 @@
                 </div>
                 <button type="submit">Join Waitlist</button>
             </form>
-            <p class="privacy">We'll only email you once when we launch.</p>
+            <p class="privacy">We'll email you when the extension launches.</p>
         </div>
     </div>
 </body>
