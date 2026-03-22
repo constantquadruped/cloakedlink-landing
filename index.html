@@ -134,7 +134,12 @@ footer .footer-links a:hover{color:var(--green)}
         See it in action
       </a>
     </div>
-    <p class="bookmarklet-hint">Browser extensions coming soon.</p>
+    <p class="bookmarklet-hint" style="margin-bottom:24px">Browser extensions coming soon.</p>
+    <form class="waitlist-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='You\'re on the list!';this.querySelector('button').disabled=true;this.querySelector('input').disabled=true;" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:460px;margin:0 auto">
+      <input type="email" placeholder="your@email.com" required style="padding:12px 18px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:var(--white);font-size:.95rem;flex:1;min-width:220px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+      <button type="submit" class="btn btn-primary" style="padding:12px 24px;font-size:.95rem">Notify me</button>
+    </form>
+    <p style="text-align:center;font-size:.75rem;color:var(--gray);margin-top:10px">We'll email you when the extensions launch. No spam.</p>
   </div>
 </section>
 
