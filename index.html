@@ -1,96 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloakedLink - Privacy-First Link Management</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container { text-align: center; max-width: 600px; padding: 2rem; }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #fff, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .tagline { color: #888; font-size: 1.3rem; margin-bottom: 2rem; }
-        .features {
-            text-align: left; margin: 2rem 0; padding: 1.5rem;
-            background: rgba(255,255,255,0.05); border-radius: 12px;
-        }
-        .features li { list-style: none; padding: 0.5rem 0; color: #ccc; }
-        .features li::before { content: "✓ "; color: #4ade80; }
-        .tool-section {
-            margin: 2rem 0; padding: 1.5rem;
-            background: rgba(74, 222, 128, 0.1); border-radius: 12px;
-            border: 1px solid rgba(74, 222, 128, 0.3);
-        }
-        .tool-section h2 { font-size: 1.2rem; margin-bottom: 0.5rem; color: #4ade80; }
-        .tool-section p { color: #aaa; font-size: 0.9rem; margin-bottom: 1rem; }
-        .bookmarklet {
-            display: inline-block; padding: 0.8rem 1.5rem;
-            background: #4ade80; color: #000; border-radius: 8px;
-            text-decoration: none; font-weight: 600;
-            cursor: grab; transition: background 0.2s;
-        }
-        .bookmarklet:hover { background: #22c55e; }
-        .instructions { font-size: 0.8rem; color: #666; margin-top: 0.5rem; }
-        .cta { margin-top: 2rem; }
-        .cta p { color: #888; margin-bottom: 1rem; }
-        form { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; position: relative; }
-        input[type="email"] {
-            padding: 0.8rem 1rem; border: 1px solid #333; border-radius: 8px;
-            background: #111; color: #fff; font-size: 1rem; width: 250px;
-        }
-        input[type="email"]:focus { outline: none; border-color: #4ade80; }
-        button {
-            padding: 0.8rem 1.5rem; background: #4ade80; color: #000;
-            border: none; border-radius: 8px; font-size: 1rem;
-            font-weight: 600; cursor: pointer; transition: background 0.2s;
-        }
-        button:hover { background: #22c55e; }
-        .privacy { margin-top: 1rem; font-size: 0.8rem; color: #666; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CloakedLink — Strip Tracking Parameters from URLs</title>
+<meta name="description" content="CloakedLink strips tracking parameters from every URL — automatically, privately, instantly. No data collected. Ever.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg-dark:#0a0a0a;--bg-card:#1a1a2e;--green:#4ade80;--green-dim:#22c55e;--green-glow:rgba(74,222,128,0.15);--white:#f1f1f1;--gray:#94a3b8;--radius:12px;--max-w:1100px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;background:linear-gradient(160deg,var(--bg-dark) 0%,#0f0f23 40%,var(--bg-card) 100%);color:var(--white);line-height:1.6;overflow-x:hidden;min-height:100vh}
+a{color:var(--green);text-decoration:none;transition:opacity .2s}
+a:hover{opacity:.8}
+
+/* ── Utility ── */
+.container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;background:rgba(10,10,10,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;max-width:100%}
+nav .logo{font-weight:700;font-size:1.15rem;letter-spacing:-.02em}
+nav .logo span{color:var(--green)}
+nav ul{list-style:none;display:flex;gap:28px}
+nav ul li a{color:var(--gray);font-size:.875rem;transition:color .2s}
+nav ul li a:hover{color:var(--white);opacity:1}
+@media(max-width:640px){nav ul{display:none}}
+
+/* ── HERO ── */
+.hero{padding:180px 0 100px;text-align:center}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:20px}
+.hero h1 span{color:var(--green)}
+.hero .subtitle{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--gray);max-width:600px;margin:0 auto 40px}
+.cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:50px;font-size:1rem;font-weight:600;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-primary{background:var(--green);color:#0a0a0a}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(74,222,128,.35)}
+.btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.2)}
+.btn-outline:hover{border-color:var(--green);transform:translateY(-2px)}
+.hero .bookmarklet-hint{margin-top:20px;font-size:.875rem;color:var(--gray)}
+.hero .bookmarklet-hint a{color:var(--green)}
+
+/* ── DEMO ── */
+#demo{background:rgba(255,255,255,.02)}
+.demo-box{background:rgba(26,26,46,.6);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:40px;max-width:760px;margin:0 auto}
+.section-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--green);font-weight:600;margin-bottom:10px;text-align:center}
+.section-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;letter-spacing:-.02em;text-align:center;margin-bottom:16px}
+.section-sub{text-align:center;color:var(--gray);margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto}
+.demo-input-wrap{position:relative;margin-bottom:16px}
+.demo-input{width:100%;padding:16px 18px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(0,0,0,.4);color:var(--white);font-size:.95rem;font-family:inherit;outline:none;transition:border-color .2s}
+.demo-input:focus{border-color:var(--green)}
+.demo-btn{width:100%;padding:14px;border-radius:10px;background:var(--green);color:#0a0a0a;font-size:1rem;font-weight:700;border:none;cursor:pointer;transition:opacity .2s}
+.demo-btn:hover{opacity:.9}
+.demo-result{margin-top:20px;display:none}
+.demo-result.show{display:block}
+.demo-clean-url{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);border-radius:10px;padding:16px 18px;word-break:break-all;font-size:.92rem;color:var(--green);margin-bottom:12px;font-family:'SF Mono',SFMono-Regular,ui-monospace,'Cascadia Code',Menlo,monospace}
+.demo-stats{font-size:.9rem;color:var(--gray);display:flex;align-items:center;gap:6px}
+.demo-stats strong{color:var(--green)}
+
+/* ── PARAMS ── */
+.params-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.param-card{background:rgba(26,26,46,.5);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:28px}
+.param-card h3{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.param-card h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;flex-shrink:0}
+.param-list{display:flex;flex-wrap:wrap;gap:8px}
+.param-tag{background:rgba(255,255,255,.06);padding:4px 12px;border-radius:6px;font-size:.8rem;color:var(--gray);font-family:'SF Mono',SFMono-Regular,ui-monospace,'Cascadia Code',Menlo,monospace}
+
+/* ── HOW IT WORKS ── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin-top:12px}
+.step{text-align:center;padding:36px 24px;background:rgba(26,26,46,.4);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);transition:border-color .3s}
+.step:hover{border-color:rgba(74,222,128,.3)}
+.step-num{width:52px;height:52px;border-radius:50%;background:var(--green-glow);color:var(--green);display:inline-flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;margin-bottom:18px}
+.step h3{font-size:1.15rem;margin-bottom:8px}
+.step p{color:var(--gray);font-size:.92rem}
+
+/* ── PRIVACY ── */
+#privacy{text-align:center}
+.privacy-box{max-width:640px;margin:0 auto;background:rgba(26,26,46,.45);border:1px solid rgba(74,222,128,.12);border-radius:var(--radius);padding:48px 36px}
+.privacy-box h3{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:700;margin-bottom:16px}
+.privacy-box p{color:var(--gray);margin-bottom:10px;font-size:1rem}
+.privacy-box .tagline{color:var(--green);font-weight:600;font-size:1.05rem;margin-top:20px}
+
+/* ── BOOKMARKLET ── */
+.bookmarklet-section{text-align:center}
+.bookmarklet-pill{display:inline-block;padding:14px 32px;background:var(--green);color:#0a0a0a;font-weight:700;font-size:1rem;border-radius:50px;cursor:grab;user-select:none;box-shadow:0 4px 24px rgba(74,222,128,.3);transition:transform .2s,box-shadow .2s;text-decoration:none}
+.bookmarklet-pill:hover{transform:scale(1.05);box-shadow:0 6px 36px rgba(74,222,128,.45);opacity:1}
+.bookmarklet-instructions{margin-top:24px;color:var(--gray);font-size:.95rem}
+.bookmarklet-instructions ol{display:inline-block;text-align:left;margin-top:12px}
+.bookmarklet-instructions li{margin-bottom:6px}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid rgba(255,255,255,.06);padding:40px 0;text-align:center}
+footer .footer-brand{font-weight:600;margin-bottom:6px;font-size:.95rem}
+footer .footer-copy{color:var(--gray);font-size:.8rem;margin-bottom:12px}
+footer .footer-links{display:flex;justify-content:center;gap:20px}
+footer .footer-links a{color:var(--gray);font-size:.85rem}
+footer .footer-links a:hover{color:var(--green)}
+
+/* ── Responsive ── */
+@media(max-width:640px){
+  section{padding:72px 0}
+  .hero{padding:140px 0 72px}
+  .demo-box{padding:24px}
+  .param-card{padding:20px}
+  .privacy-box{padding:32px 20px}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>CloakedLink</h1>
-        <p class="tagline">Privacy-first link management.</p>
-        <ul class="features">
-            <li>Strip tracking parameters from any URL</li>
-            <li>Remove UTM, Facebook, Google tracking codes</li>
-            <li>Works instantly in your browser</li>
-            <li>No data collected. Ever.</li>
-        </ul>
-        
-        <div class="tool-section">
-            <h2>Free Tool: Link Cleaner Bookmarklet</h2>
-            <p>Drag this button to your bookmarks bar:</p>
-            <a class="bookmarklet" href="javascript:(function(){const u=new URL(window.location.href);const strip=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_id','fbclid','gclid','gbraid','wbraid','msclkid','mc_cid','mc_eid','_ga','_gl','ref','ref_src','ref_url','source','pk_campaign','pk_kwd','piwik_campaign','piwik_kwd','hsa_acc','hsa_cam','hsa_grp','hsa_ad','hsa_src','hsa_tgt','hsa_kw','hsa_mt','hsa_net','hsa_ver','igshid','s_kwcid','ss_source','ss_campaign'];let removed=0;strip.forEach(p=>{if(u.searchParams.has(p)){u.searchParams.delete(p);removed++;}});if(removed>0){window.history.replaceState({},'',u.toString());alert('CloakedLink: Stripped '+removed+' tracking parameter'+(removed>1?'s':'')+'!');}else{alert('CloakedLink: No tracking parameters found.');}})();">🔗 CloakedLink</a>
-            <p class="instructions">Then click it on any page to strip tracking parameters.</p>
-        </div>
 
-        <div class="cta">
-            <p>Get notified about the browser extension:</p>
-            <form action="https://cloakedlink.us7.list-manage.com/subscribe/post?u=a9ca8634466ce15ec8bfeb496&amp;id=7e1d2f476b&amp;f_id=00313ee0f0" method="post" target="_blank">
-                <input type="email" name="EMAIL" placeholder="you@example.com" required>
-                <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                    <input type="text" name="b_a9ca8634466ce15ec8bfeb496_7e1d2f476b" tabindex="-1" value="">
-                </div>
-                <button type="submit">Join Waitlist</button>
-            </form>
-            <p class="privacy">We'll email you when the extension launches.</p>
-        </div>
+<!-- NAV -->
+<nav>
+  <div class="logo">Cloaked<span>Link</span></div>
+  <ul>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#params">What We Remove</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#bookmarklet">Bookmarklet</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container fade-in">
+    <h1>Stop being tracked.<br>Start browsing <span>clean.</span></h1>
+    <p class="subtitle">CloakedLink strips tracking parameters from every URL&nbsp;&mdash; automatically, privately, instantly.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+        Get Chrome Extension
+      </a>
+      <a href="#" class="btn btn-outline">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.583 3.067 8.437 7.25 9.625V18.5s-1-.25-1.75-.875C6.5 16.75 6.25 15 7 14s2-.75 2-.75 0-1.25-.25-2S8 10 8 10s1-.5 2.5.5c.667.444 1.167.5 1.5.5s.833-.056 1.5-.5C15 9.5 16 10 16 10s-.5.5-.75 1.25-.25 2-.25 2 1.25-.25 2 .75 .5 2.75-.5 3.625C15.75 18.25 14.75 18.5 14.75 18.5v3.125C18.933 20.437 22 16.583 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        Get Firefox Extension
+      </a>
     </div>
+    <p class="bookmarklet-hint">Don't want an extension? <a href="#bookmarklet">Try the bookmarklet</a></p>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Live Demo</p>
+      <h2 class="section-title">See it in action</h2>
+      <p class="section-sub">Paste any URL and watch the trackers disappear.</p>
+    </div>
+    <div class="demo-box fade-in">
+      <div class="demo-input-wrap">
+        <input type="text" class="demo-input" id="demoInput" value="https://example.com/page?utm_source=facebook&fbclid=abc123&utm_campaign=spring_sale&gclid=xyz789" spellcheck="false">
+      </div>
+      <button class="demo-btn" id="demoBtn">Clean URL</button>
+      <div class="demo-result" id="demoResult">
+        <div class="demo-clean-url" id="demoClean"></div>
+        <p class="demo-stats"><strong id="demoCount">0</strong>&nbsp;tracking parameters removed</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE REMOVE -->
+<section id="params">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">What We Remove</p>
+      <h2 class="section-title">37 tracking parameters. Zero exceptions.</h2>
+      <p class="section-sub">Every major ad platform and analytics service, handled automatically.</p>
+    </div>
+    <div class="params-grid">
+      <div class="param-card fade-in">
+        <h3><span class="dot"></span>Google Analytics</h3>
+        <div class="param-list">
+          <span class="param-tag">utm_source</span>
+          <span class="param-tag">utm_medium</span>
+          <span class="param-tag">utm_campaign</span>
+          <span class="param-tag">utm_term</span>
+          <span class="param-tag">utm_content</span>
+          <span class="param-tag">utm_id</span>
+          <span class="param-tag">_ga</span>
+          <span class="param-tag">_gl</span>
+        </div>
+      </div>
+      <div class="param-card fade-in">
+        <h3><span class="dot"></span>Facebook / Meta</h3>
+        <div class="param-list">
+          <span class="param-tag">fbclid</span>
+          <span class="param-tag">igshid</span>
+        </div>
+      </div>
+      <div class="param-card fade-in">
+        <h3><span class="dot"></span>Google Ads</h3>
+        <div class="param-list">
+          <span class="param-tag">gclid</span>
+          <span class="param-tag">gbraid</span>
+          <span class="param-tag">wbraid</span>
+          <span class="param-tag">hsa_acc</span>
+          <span class="param-tag">hsa_cam</span>
+          <span class="param-tag">hsa_grp</span>
+          <span class="param-tag">hsa_ad</span>
+          <span class="param-tag">hsa_src</span>
+          <span class="param-tag">hsa_tgt</span>
+          <span class="param-tag">hsa_kw</span>
+          <span class="param-tag">hsa_mt</span>
+          <span class="param-tag">hsa_net</span>
+          <span class="param-tag">hsa_ver</span>
+        </div>
+      </div>
+      <div class="param-card fade-in">
+        <h3><span class="dot"></span>Microsoft Ads</h3>
+        <div class="param-list">
+          <span class="param-tag">msclkid</span>
+          <span class="param-tag">s_kwcid</span>
+        </div>
+      </div>
+      <div class="param-card fade-in">
+        <h3><span class="dot"></span>Mailchimp</h3>
+        <div class="param-list">
+          <span class="param-tag">mc_cid</span>
+          <span class="param-tag">mc_eid</span>
+        </div>
+      </div>
+      <div class="param-card fade-in">
+        <h3><span class="dot"></span>Matomo / Piwik</h3>
+        <div class="param-list">
+          <span class="param-tag">pk_campaign</span>
+          <span class="param-tag">pk_kwd</span>
+          <span class="param-tag">piwik_campaign</span>
+          <span class="param-tag">piwik_kwd</span>
+        </div>
+      </div>
+      <div class="param-card fade-in">
+        <h3><span class="dot"></span>Other Trackers</h3>
+        <div class="param-list">
+          <span class="param-tag">ref</span>
+          <span class="param-tag">ref_src</span>
+          <span class="param-tag">ref_url</span>
+          <span class="param-tag">source</span>
+          <span class="param-tag">ss_source</span>
+          <span class="param-tag">ss_campaign</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">How It Works</p>
+      <h2 class="section-title">Three steps. Zero tracking.</h2>
+    </div>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-num">1</div>
+        <h3>Install</h3>
+        <p>Add the browser extension or drag the bookmarklet to your toolbar. Takes five seconds.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">2</div>
+        <h3>Browse</h3>
+        <p>Visit any website normally. CloakedLink works silently in the background.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">3</div>
+        <h3>Clean</h3>
+        <p>Tracking parameters are stripped automatically before the page loads. You see a clean URL.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY PROMISE -->
+<section id="privacy">
+  <div class="container fade-in">
+    <div class="privacy-box">
+      <h3>No data collected. Ever.</h3>
+      <p>No servers. No analytics. No accounts. Everything runs locally in your browser.</p>
+      <p class="tagline">We don't track you. That's literally the point.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKMARKLET -->
+<section id="bookmarklet" class="bookmarklet-section">
+  <div class="container fade-in">
+    <p class="section-label">Bookmarklet</p>
+    <h2 class="section-title">No extension? No problem.</h2>
+    <p class="section-sub">Drag this button to your bookmarks bar for one-click URL cleaning.</p>
+
+    <a class="bookmarklet-pill" href="javascript:void(function(){var t=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_id','_ga','_gl','fbclid','igshid','gclid','gbraid','wbraid','hsa_acc','hsa_cam','hsa_grp','hsa_ad','hsa_src','hsa_tgt','hsa_kw','hsa_mt','hsa_net','hsa_ver','msclkid','s_kwcid','mc_cid','mc_eid','pk_campaign','pk_kwd','piwik_campaign','piwik_kwd','ref','ref_src','ref_url','source','ss_source','ss_campaign'],u=new URL(window.location.href),c=0;t.forEach(function(p){if(u.searchParams.has(p)){u.searchParams.delete(p);c++}});if(c>0){window.history.replaceState(null,'',u.toString());alert('CloakedLink: Removed '+c+' tracking parameter'+(c!==1?'s':'')+'.')}else{alert('CloakedLink: No tracking parameters found.')}}())">
+      CloakedLink
+    </a>
+
+    <div class="bookmarklet-instructions">
+      <ol>
+        <li>Drag the green button above to your bookmarks bar.</li>
+        <li>Visit any page with a tracked URL.</li>
+        <li>Click the bookmarklet to strip tracking parameters instantly.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p class="footer-brand">CloakedLink &mdash; Browse without a trace.</p>
+    <p class="footer-copy">&copy; 2025 CloakedLink. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">GitHub</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ── Tracking params list ── */
+  const TRACKING_PARAMS = [
+    'utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_id',
+    '_ga','_gl','fbclid','igshid','gclid','gbraid','wbraid',
+    'hsa_acc','hsa_cam','hsa_grp','hsa_ad','hsa_src','hsa_tgt','hsa_kw','hsa_mt','hsa_net','hsa_ver',
+    'msclkid','s_kwcid','mc_cid','mc_eid',
+    'pk_campaign','pk_kwd','piwik_campaign','piwik_kwd',
+    'ref','ref_src','ref_url','source','ss_source','ss_campaign'
+  ];
+
+  /* ── Live Demo ── */
+  const input = document.getElementById('demoInput');
+  const btn = document.getElementById('demoBtn');
+  const result = document.getElementById('demoResult');
+  const clean = document.getElementById('demoClean');
+  const count = document.getElementById('demoCount');
+
+  btn.addEventListener('click', function(){
+    let raw = input.value.trim();
+    if(!raw) return;
+    try {
+      if(!/^https?:\/\//i.test(raw)) raw = 'https://' + raw;
+      var u = new URL(raw);
+      var removed = 0;
+      TRACKING_PARAMS.forEach(function(p){
+        if(u.searchParams.has(p)){ u.searchParams.delete(p); removed++; }
+      });
+      clean.textContent = u.toString();
+      count.textContent = removed;
+      result.classList.add('show');
+    } catch(e){
+      clean.textContent = 'Invalid URL. Please enter a full URL.';
+      count.textContent = '0';
+      result.classList.add('show');
+    }
+  });
+
+  /* ── Fade-in on scroll (IntersectionObserver) ── */
+  var faders = document.querySelectorAll('.fade-in');
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    faders.forEach(function(el){ obs.observe(el); });
+  } else {
+    faders.forEach(function(el){ el.classList.add('visible'); });
+  }
+})();
+</script>
 </body>
 </html>
