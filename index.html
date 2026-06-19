@@ -7,105 +7,104 @@
 <meta name="description" content="CloakedLink strips tracking parameters from every URL — automatically, privately, instantly. No data collected. Ever.">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg-dark:#0a0a0a;--bg-card:#1a1a2e;--green:#4ade80;--green-dim:#22c55e;--green-glow:rgba(74,222,128,0.15);--white:#f1f1f1;--gray:#94a3b8;--radius:12px;--max-w:1100px}
+:root{--bg-dark:#08080c;--bg-card:#111122;--bg-card-hover:#161630;--green:#10b981;--green-dim:#059669;--green-glow:rgba(16,185,129,0.15);--purple:#8b5cf6;--purple-glow:rgba(139,92,246,0.15);--white:#f3f4f6;--gray:#9ca3af;--radius:16px;--max-w:1200px}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;background:linear-gradient(160deg,var(--bg-dark) 0%,#0f0f23 40%,var(--bg-card) 100%);color:var(--white);line-height:1.6;overflow-x:hidden;min-height:100vh}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;background:linear-gradient(180deg,var(--bg-dark) 0%,#0c0c16 50%,#110c22 100%);color:var(--white);line-height:1.6;overflow-x:hidden;min-height:100vh}
 a{color:var(--green);text-decoration:none;transition:opacity .2s}
 a:hover{opacity:.8}
 
 /* ── Utility ── */
 .container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
-section{padding:100px 0}
+section{padding:120px 0;border-bottom:1px solid rgba(255,255,255,.03)}
 .fade-in{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
+.section-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.15em;color:var(--green);font-weight:700;margin-bottom:10px;text-align:center}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.03em;text-align:center;margin-bottom:16px;line-height:1.2}
+.section-sub{text-align:center;color:var(--gray);margin-bottom:60px;max-width:600px;margin-left:auto;margin-right:auto;font-size:1.05rem}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;background:rgba(10,10,10,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;max-width:100%}
-nav .logo{font-weight:700;font-size:1.15rem;letter-spacing:-.02em}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 24px;background:rgba(8,8,12,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between;max-width:100%}
+nav .logo{font-weight:800;font-size:1.3rem;letter-spacing:-.03em}
 nav .logo span{color:var(--green)}
-nav ul{list-style:none;display:flex;gap:28px}
-nav ul li a{color:var(--gray);font-size:.875rem;transition:color .2s}
+nav ul{list-style:none;display:flex;gap:32px}
+nav ul li a{color:var(--gray);font-size:.9rem;font-weight:500;transition:color .2s}
 nav ul li a:hover{color:var(--white);opacity:1}
-@media(max-width:640px){nav ul{display:none}}
+nav .btn-nav{padding:8px 20px;font-size:.85rem;border-radius:30px}
+@media(max-width:768px){nav ul{display:none}}
 
 /* ── HERO ── */
-.hero{padding:180px 0 100px;text-align:center}
-.hero h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:20px}
+.hero{padding:220px 0 120px;text-align:center}
+.hero h1{font-size:clamp(2.5rem,6vw,4.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.1;margin-bottom:24px}
 .hero h1 span{color:var(--green)}
-.hero .subtitle{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--gray);max-width:600px;margin:0 auto 40px}
-.cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:50px;font-size:1rem;font-weight:600;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
-.btn-primary{background:var(--green);color:#0a0a0a}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(74,222,128,.35)}
-.btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.2)}
+.hero .subtitle{font-size:clamp(1.1rem,2.8vw,1.4rem);color:var(--gray);max-width:640px;margin:0 auto 48px}
+.cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 36px;border-radius:50px;font-size:1.05rem;font-weight:700;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-primary{background:var(--green);color:#08080c}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(16,185,129,.4)}
+.btn-outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.15)}
 .btn-outline:hover{border-color:var(--green);transform:translateY(-2px)}
-.hero .bookmarklet-hint{margin-top:20px;font-size:.875rem;color:var(--gray)}
-.hero .bookmarklet-hint a{color:var(--green)}
+.hero .waitlist-box{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);padding:24px;border-radius:var(--radius);max-width:540px;margin:40px auto 0}
+.hero .waitlist-box h3{font-size:1rem;margin-bottom:12px;color:var(--white)}
 
 /* ── DEMO ── */
-#demo{background:rgba(255,255,255,.02)}
-.demo-box{background:rgba(26,26,46,.6);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:40px;max-width:760px;margin:0 auto}
-.section-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--green);font-weight:600;margin-bottom:10px;text-align:center}
-.section-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;letter-spacing:-.02em;text-align:center;margin-bottom:16px}
-.section-sub{text-align:center;color:var(--gray);margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto}
-.demo-input-wrap{position:relative;margin-bottom:16px}
-.demo-input{width:100%;padding:16px 18px;border-radius:10px;border:1.5px solid rgba(255,255,255,.1);background:rgba(0,0,0,.4);color:var(--white);font-size:.95rem;font-family:inherit;outline:none;transition:border-color .2s}
+#demo{background:rgba(255,255,255,.01)}
+.demo-box{background:var(--bg-card);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:48px;max-width:800px;margin:0 auto;box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.demo-input-wrap{position:relative;margin-bottom:20px}
+.demo-input{width:100%;padding:18px 20px;border-radius:12px;border:2px solid rgba(255,255,255,.1);background:rgba(0,0,0,.5);color:var(--white);font-size:1rem;font-family:inherit;outline:none;transition:border-color .2s}
 .demo-input:focus{border-color:var(--green)}
-.demo-btn{width:100%;padding:14px;border-radius:10px;background:var(--green);color:#0a0a0a;font-size:1rem;font-weight:700;border:none;cursor:pointer;transition:opacity .2s}
-.demo-btn:hover{opacity:.9}
-.demo-result{margin-top:20px;display:none}
+.demo-btn{width:100%;padding:16px;border-radius:12px;background:var(--green);color:#08080c;font-size:1.1rem;font-weight:800;border:none;cursor:pointer;transition:opacity .2s}
+.demo-btn:hover{opacity:.95}
+.demo-result{margin-top:28px;display:none}
 .demo-result.show{display:block}
-.demo-clean-url{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);border-radius:10px;padding:16px 18px;word-break:break-all;font-size:.92rem;color:var(--green);margin-bottom:12px;font-family:'SF Mono',SFMono-Regular,ui-monospace,'Cascadia Code',Menlo,monospace}
-.demo-stats{font-size:.9rem;color:var(--gray);display:flex;align-items:center;gap:6px}
+.demo-clean-url{background:rgba(16,185,129,.08);border:1.5px solid rgba(16,185,129,.25);border-radius:12px;padding:18px 20px;word-break:break-all;font-size:.95rem;color:var(--green);margin-bottom:16px;font-family:'SF Mono',SFMono-Regular,ui-monospace,monospace}
+.demo-stats{font-size:.95rem;color:var(--gray);display:flex;align-items:center;gap:6px}
 .demo-stats strong{color:var(--green)}
 
-/* ── PARAMS ── */
-.params-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.param-card{background:rgba(26,26,46,.5);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:28px}
-.param-card h3{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.param-card h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;flex-shrink:0}
-.param-list{display:flex;flex-wrap:wrap;gap:8px}
-.param-tag{background:rgba(255,255,255,.06);padding:4px 12px;border-radius:6px;font-size:.8rem;color:var(--gray);font-family:'SF Mono',SFMono-Regular,ui-monospace,'Cascadia Code',Menlo,monospace}
+/* ── SHORTLINK GENERATOR (PREMIUM FEATURE PREVIEW) ── */
+.shortlink-preview{margin-top:60px;background:rgba(139,92,246,.03);border:1px dashed rgba(139,92,246,.3);border-radius:var(--radius);padding:32px;text-align:center;max-width:800px;margin-left:auto;margin-right:auto}
+.badge-pro{display:inline-block;padding:4px 12px;background:var(--purple);color:var(--white);font-size:.75rem;font-weight:700;border-radius:20px;margin-bottom:12px;text-transform:uppercase}
+.shortlink-preview h3{font-size:1.25rem;margin-bottom:8px}
+.shortlink-preview p{font-size:.9rem;color:var(--gray);margin-bottom:20px}
 
-/* ── HOW IT WORKS ── */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin-top:12px}
-.step{text-align:center;padding:36px 24px;background:rgba(26,26,46,.4);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);transition:border-color .3s}
-.step:hover{border-color:rgba(74,222,128,.3)}
-.step-num{width:52px;height:52px;border-radius:50%;background:var(--green-glow);color:var(--green);display:inline-flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;margin-bottom:18px}
-.step h3{font-size:1.15rem;margin-bottom:8px}
-.step p{color:var(--gray);font-size:.92rem}
+/* ── PRICING & EXTENSIONS ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;max-width:900px;margin:0 auto}
+.pricing-card{background:var(--bg-card);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:48px 32px;position:relative;display:flex;flex-direction:column}
+.pricing-card.premium{border-color:var(--purple);box-shadow:0 10px 30px rgba(139,92,246,.1)}
+.pricing-card.premium::before{content:'RECOMMENDED';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--purple);color:var(--white);font-size:.75rem;font-weight:800;padding:4px 16px;border-radius:20px;letter-spacing:.05em}
+.pricing-card h3{font-size:1.5rem;margin-bottom:12px}
+.pricing-card .price{font-size:2.5rem;font-weight:800;margin-bottom:24px}
+.pricing-card .price span{font-size:1rem;color:var(--gray);font-weight:400}
+.pricing-card ul{list-style:none;margin-bottom:40px;flex-grow:1}
+.pricing-card ul li{margin-bottom:14px;font-size:.95rem;color:var(--gray);display:flex;align-items:center;gap:10px}
+.pricing-card ul li::before{content:'✓';color:var(--green);font-weight:700}
+.pricing-card.premium ul li::before{color:var(--purple)}
 
-/* ── PRIVACY ── */
-#privacy{text-align:center}
-.privacy-box{max-width:640px;margin:0 auto;background:rgba(26,26,46,.45);border:1px solid rgba(74,222,128,.12);border-radius:var(--radius);padding:48px 36px}
-.privacy-box h3{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:700;margin-bottom:16px}
-.privacy-box p{color:var(--gray);margin-bottom:10px;font-size:1rem}
-.privacy-box .tagline{color:var(--green);font-weight:600;font-size:1.05rem;margin-top:20px}
+/* ── RECOMMENDATIONS ── */
+.recs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.rec-card{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius);padding:32px;transition:transform .3s,border-color .3s;display:flex;flex-direction:column}
+.rec-card:hover{transform:translateY(-4px);border-color:var(--green)}
+.rec-card h3{font-size:1.2rem;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.rec-card p{color:var(--gray);font-size:.92rem;margin-bottom:24px;flex-grow:1}
+.rec-card .btn-rec{align-self:flex-start;padding:8px 20px;font-size:.85rem;border-radius:30px}
 
-/* ── BOOKMARKLET ── */
-.bookmarklet-section{text-align:center}
-.bookmarklet-pill{display:inline-block;padding:14px 32px;background:var(--green);color:#0a0a0a;font-weight:700;font-size:1rem;border-radius:50px;cursor:grab;user-select:none;box-shadow:0 4px 24px rgba(74,222,128,.3);transition:transform .2s,box-shadow .2s;text-decoration:none}
-.bookmarklet-pill:hover{transform:scale(1.05);box-shadow:0 6px 36px rgba(74,222,128,.45);opacity:1}
-.bookmarklet-instructions{margin-top:24px;color:var(--gray);font-size:.95rem}
-.bookmarklet-instructions ol{display:inline-block;text-align:left;margin-top:12px}
-.bookmarklet-instructions li{margin-bottom:6px}
+/* ── BUSINESS / B2B ── */
+.business-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center;max-width:1000px;margin:0 auto}
+.business-features{display:grid;gap:24px}
+.b2b-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);padding:24px;border-radius:var(--radius)}
+.b2b-card h4{font-size:1.1rem;margin-bottom:8px;color:var(--white)}
+.b2b-card p{color:var(--gray);font-size:.9rem}
+
+/* ── SPONSORS ── */
+.sponsor-box{max-width:600px;margin:0 auto;text-align:center;background:rgba(255,255,255,.01);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius);padding:40px}
+.sponsor-btn-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:24px}
 
 /* ── FOOTER ── */
-footer{border-top:1px solid rgba(255,255,255,.06);padding:40px 0;text-align:center}
-footer .footer-brand{font-weight:600;margin-bottom:6px;font-size:.95rem}
-footer .footer-copy{color:var(--gray);font-size:.8rem;margin-bottom:12px}
-footer .footer-links{display:flex;justify-content:center;gap:20px}
-footer .footer-links a{color:var(--gray);font-size:.85rem}
+footer{padding:60px 0;text-align:center;background:#050508}
+footer .footer-brand{font-weight:700;margin-bottom:8px;font-size:1.05rem}
+footer .footer-copy{color:var(--gray);font-size:.85rem;margin-bottom:20px}
+footer .footer-links{display:flex;justify-content:center;gap:24px}
+footer .footer-links a{color:var(--gray);font-size:.9rem}
 footer .footer-links a:hover{color:var(--green)}
-
-/* ── Responsive ── */
-@media(max-width:640px){
-  section{padding:72px 0}
-  .hero{padding:140px 0 72px}
-  .demo-box{padding:24px}
-  .param-card{padding:20px}
-  .privacy-box{padding:32px 20px}
-}
 </style>
 </head>
 <body>
@@ -115,31 +114,32 @@ footer .footer-links a:hover{color:var(--green)}
   <div class="logo">Cloaked<span>Link</span></div>
   <ul>
     <li><a href="#demo">Demo</a></li>
-    <li><a href="#params">What We Remove</a></li>
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#bookmarklet">Bookmarklet</a></li>
+    <li><a href="#pro">Extensions (Pro)</a></li>
+    <li><a href="#recs">Privacy Recommendations</a></li>
+    <li><a href="#business">B2B Compliance</a></li>
+    <li><a href="#support">Support Us</a></li>
   </ul>
+  <a href="#pro" class="btn btn-primary btn-nav">Go Pro</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="container fade-in">
     <h1>Stop being tracked.<br>Start browsing <span>clean.</span></h1>
-    <p class="subtitle">CloakedLink strips tracking parameters from every URL&nbsp;&mdash; automatically, privately, instantly.</p>
+    <p class="subtitle">CloakedLink strips tracking parameters from every URL — automatically, privately, instantly.</p>
     <div class="cta-row">
-      <a href="#bookmarklet" class="btn btn-primary">
-        Get the Bookmarklet
-      </a>
-      <a href="#demo" class="btn btn-outline">
-        See it in action
-      </a>
+      <a href="#pro" class="btn btn-primary">Get CloakedLink Pro</a>
+      <a href="#demo" class="btn btn-outline">See it in action</a>
     </div>
-    <p class="bookmarklet-hint" style="margin-bottom:24px">Browser extensions coming soon.</p>
-    <form class="waitlist-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='You\'re on the list!';this.querySelector('button').disabled=true;this.querySelector('input').disabled=true;" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:460px;margin:0 auto">
-      <input type="email" placeholder="your@email.com" required style="padding:12px 18px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:var(--white);font-size:.95rem;flex:1;min-width:220px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
-      <button type="submit" class="btn btn-primary" style="padding:12px 24px;font-size:.95rem">Notify me</button>
-    </form>
-    <p style="text-align:center;font-size:.75rem;color:var(--gray);margin-top:10px">We'll email you when the extensions launch. No spam.</p>
+    
+    <div class="waitlist-box">
+      <h3>Join the Browser Extensions Pro Waitlist</h3>
+      <form class="waitlist-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='You\'re on the list!';this.querySelector('button').disabled=true;this.querySelector('input').disabled=true;" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <input type="email" placeholder="your@email.com" required style="padding:12px 18px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:var(--white);font-size:.95rem;flex:1;min-width:200px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+        <button type="submit" class="btn btn-primary" style="padding:12px 24px;font-size:.95rem">Get Early Access</button>
+      </form>
+      <p style="text-align:center;font-size:.75rem;color:var(--gray);margin-top:10px">Sign up for early Chrome, Safari, and Firefox extension builds.</p>
+    </div>
   </div>
 </section>
 
@@ -149,7 +149,7 @@ footer .footer-links a:hover{color:var(--green)}
     <div class="fade-in">
       <p class="section-label">Live Demo</p>
       <h2 class="section-title">See it in action</h2>
-      <p class="section-sub">Paste any URL and watch the trackers disappear.</p>
+      <p class="section-sub">Paste any tracked link and watch the parameters disappear locally in your browser.</p>
     </div>
     <div class="demo-box fade-in">
       <div class="demo-input-wrap">
@@ -158,152 +158,137 @@ footer .footer-links a:hover{color:var(--green)}
       <button class="demo-btn" id="demoBtn">Clean URL</button>
       <div class="demo-result" id="demoResult">
         <div class="demo-clean-url" id="demoClean"></div>
-        <p class="demo-stats"><strong id="demoCount">0</strong>&nbsp;tracking parameters removed</p>
+        <p class="demo-stats"><strong id="demoCount">0</strong> tracking parameters removed</p>
       </div>
+    </div>
+    
+    <!-- Shortlink Pro Preview -->
+    <div class="shortlink-preview fade-in">
+      <span class="badge-pro">Pro Feature Preview</span>
+      <h3>Generate Secure Shortlinks</h3>
+      <p>Clean URLs and pack them into temporary, non-tracking shortlinks (e.g. <code>clk.lnk/clean</code>) that keep your analytics clean and respect recipient privacy.</p>
+      <button class="btn btn-outline" style="padding:10px 24px;font-size:.9rem" onclick="alert('This premium feature is available in the Pro version!')">Try Shortlink Generator</button>
     </div>
   </div>
 </section>
 
-<!-- WHAT WE REMOVE -->
-<section id="params">
+<!-- PRICING & EXTENSIONS (PRO) -->
+<section id="pro">
   <div class="container">
     <div class="fade-in">
-      <p class="section-label">What We Remove</p>
-      <h2 class="section-title">37 tracking parameters. Zero exceptions.</h2>
-      <p class="section-sub">Every major ad platform and analytics service, handled automatically.</p>
+      <p class="section-label">Go Premium</p>
+      <h2 class="section-title">Browser Extensions & Pro Features</h2>
+      <p class="section-sub">Take URL sanitation to the next level with native auto-cleaning.</p>
     </div>
-    <div class="params-grid">
-      <div class="param-card fade-in">
-        <h3><span class="dot"></span>Google Analytics</h3>
-        <div class="param-list">
-          <span class="param-tag">utm_source</span>
-          <span class="param-tag">utm_medium</span>
-          <span class="param-tag">utm_campaign</span>
-          <span class="param-tag">utm_term</span>
-          <span class="param-tag">utm_content</span>
-          <span class="param-tag">utm_id</span>
-          <span class="param-tag">_ga</span>
-          <span class="param-tag">_gl</span>
-        </div>
+    
+    <div class="pricing-grid">
+      <!-- Free -->
+      <div class="pricing-card fade-in">
+        <h3>Free Edition</h3>
+        <div class="price">$0 <span>forever</span></div>
+        <ul>
+          <li>Manual URL copy-paste cleaning</li>
+          <li>Standard Bookmarklet support</li>
+          <li>Cleans 37 common ad trackers</li>
+          <li>100% offline local processing</li>
+        </ul>
+        <a href="#bookmarklet" class="btn btn-outline">Drag Bookmarklet</a>
       </div>
-      <div class="param-card fade-in">
-        <h3><span class="dot"></span>Facebook / Meta</h3>
-        <div class="param-list">
-          <span class="param-tag">fbclid</span>
-          <span class="param-tag">igshid</span>
-        </div>
-      </div>
-      <div class="param-card fade-in">
-        <h3><span class="dot"></span>Google Ads</h3>
-        <div class="param-list">
-          <span class="param-tag">gclid</span>
-          <span class="param-tag">gbraid</span>
-          <span class="param-tag">wbraid</span>
-          <span class="param-tag">hsa_acc</span>
-          <span class="param-tag">hsa_cam</span>
-          <span class="param-tag">hsa_grp</span>
-          <span class="param-tag">hsa_ad</span>
-          <span class="param-tag">hsa_src</span>
-          <span class="param-tag">hsa_tgt</span>
-          <span class="param-tag">hsa_kw</span>
-          <span class="param-tag">hsa_mt</span>
-          <span class="param-tag">hsa_net</span>
-          <span class="param-tag">hsa_ver</span>
-        </div>
-      </div>
-      <div class="param-card fade-in">
-        <h3><span class="dot"></span>Microsoft Ads</h3>
-        <div class="param-list">
-          <span class="param-tag">msclkid</span>
-          <span class="param-tag">s_kwcid</span>
-        </div>
-      </div>
-      <div class="param-card fade-in">
-        <h3><span class="dot"></span>Mailchimp</h3>
-        <div class="param-list">
-          <span class="param-tag">mc_cid</span>
-          <span class="param-tag">mc_eid</span>
-        </div>
-      </div>
-      <div class="param-card fade-in">
-        <h3><span class="dot"></span>Matomo / Piwik</h3>
-        <div class="param-list">
-          <span class="param-tag">pk_campaign</span>
-          <span class="param-tag">pk_kwd</span>
-          <span class="param-tag">piwik_campaign</span>
-          <span class="param-tag">piwik_kwd</span>
-        </div>
-      </div>
-      <div class="param-card fade-in">
-        <h3><span class="dot"></span>Other Trackers</h3>
-        <div class="param-list">
-          <span class="param-tag">ref</span>
-          <span class="param-tag">ref_src</span>
-          <span class="param-tag">ref_url</span>
-          <span class="param-tag">source</span>
-          <span class="param-tag">ss_source</span>
-          <span class="param-tag">ss_campaign</span>
-        </div>
+      
+      <!-- Pro -->
+      <div class="pricing-card premium fade-in">
+        <h3>Pro Edition</h3>
+        <div class="price">$1.99 <span>/ month</span></div>
+        <ul>
+          <li><strong>Auto Clipboard Strip</strong> (Cleans copied links automatically)</li>
+          <li><strong>Redirect Bypass</strong> (Skips intermediate tracker links)</li>
+          <li><strong>Chrome, Safari & Firefox Extensions</strong></li>
+          <li><strong>Premium Shortlink Generator</strong></li>
+          <li>Custom tracking parameter blocks</li>
+          <li>Priority updates for new ad-trackers</li>
+        </ul>
+        <button class="btn btn-primary" onclick="alert('Early access signup is active in the Hero section above!')">Unlock Pro Access</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section id="how">
+<!-- PRIVACY-SAFE RECOMMENDATIONS -->
+<section id="recs">
   <div class="container">
     <div class="fade-in">
-      <p class="section-label">How It Works</p>
-      <h2 class="section-title">Three steps. Zero tracking.</h2>
+      <p class="section-label">Browse Safely</p>
+      <h2 class="section-title">Recommended Privacy Utilities</h2>
+      <p class="section-sub">We only recommend tools we use ourselves. Zero tracking cookies. Ever.</p>
     </div>
-    <div class="steps">
-      <div class="step fade-in">
-        <div class="step-num">1</div>
-        <h3>Install</h3>
-        <p>Drag the bookmarklet to your toolbar. Takes five seconds.</p>
+    
+    <div class="recs-grid">
+      <!-- ProtonMail -->
+      <div class="rec-card fade-in">
+        <h3>ProtonMail</h3>
+        <p>Secure, end-to-end encrypted email based in Switzerland. Protect your communication from prying eyes.</p>
+        <a href="https://proton.me/mail" target="_blank" rel="noopener" class="btn btn-outline btn-rec">Learn More</a>
       </div>
-      <div class="step fade-in">
-        <div class="step-num">2</div>
-        <h3>Browse</h3>
-        <p>Visit any website normally. CloakedLink works silently in the background.</p>
+      <!-- Mullvad VPN -->
+      <div class="rec-card fade-in">
+        <h3>Mullvad VPN</h3>
+        <p>A zero-log, account-less VPN service that values anonymity. Pay with cash or crypto for absolute privacy.</p>
+        <a href="https://mullvad.net/" target="_blank" rel="noopener" class="btn btn-outline btn-rec">Learn More</a>
       </div>
-      <div class="step fade-in">
-        <div class="step-num">3</div>
-        <h3>Clean</h3>
-        <p>Tracking parameters are stripped automatically before the page loads. You see a clean URL.</p>
+      <!-- Kagi Search -->
+      <div class="rec-card fade-in">
+        <h3>Kagi Search</h3>
+        <p>A fast, ad-free, privacy-respecting search engine. Zero tracking, custom lenses, and clean search results.</p>
+        <a href="https://kagi.com/" target="_blank" rel="noopener" class="btn btn-outline btn-rec">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS / B2B COMPLIANCE -->
+<section id="business">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">B2B & Enterprise</p>
+      <h2 class="section-title">CloakedLink for Business</h2>
+      <p class="section-sub">Help your team comply with GDPR/CCPA data ingestion rules.</p>
+    </div>
+    
+    <div class="business-content">
+      <div class="business-features fade-in">
+        <div class="b2b-card">
+          <h4>Data Sanitization API</h4>
+          <p>Scrub query parameters from customer URLs before saving them into your database, CRM, or data warehouses to prevent accidental tracking ingestion.</p>
+        </div>
+        <div class="b2b-card">
+          <h4>Self-Hosted Corporate Intranet</h4>
+          <p>Host CloakedLink behind your own company firewall to give employees a clean, local URL scrubbing tool for secure internal document sharing.</p>
+        </div>
+      </div>
+      <div class="fade-in" style="text-align:center">
+        <h3>Need custom integrations?</h3>
+        <p style="color:var(--gray);margin-bottom:24px">We offer volume licensing, custom parametrizations, and SLA-backed support for compliance platforms.</p>
+        <a href="mailto:sales@cloakedlink.com" class="btn btn-primary">Contact Sales</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRIVACY PROMISE -->
-<section id="privacy">
-  <div class="container fade-in">
-    <div class="privacy-box">
-      <h3>No data collected. Ever.</h3>
-      <p>No servers. No analytics. No accounts. Everything runs locally in your browser.</p>
-      <p class="tagline">We don't track you. That's literally the point.</p>
+<!-- SPONSORS / PATRONAGE -->
+<section id="support">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Support Open Source</p>
+      <h2 class="section-title">Keep the Project Running</h2>
+      <p class="section-sub">CloakedLink is committed to zero tracking. Help us fund hosting and development costs.</p>
     </div>
-  </div>
-</section>
-
-<!-- BOOKMARKLET -->
-<section id="bookmarklet" class="bookmarklet-section">
-  <div class="container fade-in">
-    <p class="section-label">Bookmarklet</p>
-    <h2 class="section-title">No extension? No problem.</h2>
-    <p class="section-sub">Drag this button to your bookmarks bar for one-click URL cleaning.</p>
-
-    <a class="bookmarklet-pill" href="javascript:void(function(){var t=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_id','_ga','_gl','fbclid','igshid','gclid','gbraid','wbraid','hsa_acc','hsa_cam','hsa_grp','hsa_ad','hsa_src','hsa_tgt','hsa_kw','hsa_mt','hsa_net','hsa_ver','msclkid','s_kwcid','mc_cid','mc_eid','pk_campaign','pk_kwd','piwik_campaign','piwik_kwd','ref','ref_src','ref_url','source','ss_source','ss_campaign'],u=new URL(window.location.href),c=0;t.forEach(function(p){if(u.searchParams.has(p)){u.searchParams.delete(p);c++}});if(c>0){window.history.replaceState(null,'',u.toString());alert('CloakedLink: Removed '+c+' tracking parameter'+(c!==1?'s':'')+'.')}else{alert('CloakedLink: No tracking parameters found.')}}())">
-      CloakedLink
-    </a>
-
-    <div class="bookmarklet-instructions">
-      <ol>
-        <li>Drag the green button above to your bookmarks bar.</li>
-        <li>Visit any page with a tracked URL.</li>
-        <li>Click the bookmarklet to strip tracking parameters instantly.</li>
-      </ol>
+    
+    <div class="sponsor-box fade-in">
+      <p>If CloakedLink has saved you from tracker-bloated links, consider throwing a tip or sponsor our open-source codebase. Every donation goes directly towards keeping the serverless routing clean and free.</p>
+      <div class="sponsor-btn-row">
+        <a href="https://github.com/sponsors" class="btn btn-outline" style="border-color:#ea4aaa;color:#ea4aaa" target="_blank" rel="noopener">Sponsor on GitHub</a>
+        <a href="https://buymeacoffee.com" class="btn btn-outline" style="border-color:#ffdd00;color:#ffdd00" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      </div>
     </div>
   </div>
 </section>
@@ -311,18 +296,17 @@ footer .footer-links a:hover{color:var(--green)}
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <p class="footer-brand">CloakedLink &mdash; Browse without a trace.</p>
-    <p class="footer-copy">&copy; 2025 CloakedLink. All rights reserved.</p>
+    <p class="footer-brand">CloakedLink — Browse without a trace.</p>
+    <p class="footer-copy">&copy; 2026 CloakedLink. All rights reserved. Everything runs locally in your browser.</p>
     <div class="footer-links">
-      <a href="#">GitHub</a>
-      <a href="#">Privacy Policy</a>
+      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      <a href="#privacy">Privacy Policy</a>
     </div>
   </div>
 </footer>
 
 <script>
 (function(){
-  /* ── Tracking params list ── */
   const TRACKING_PARAMS = [
     'utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_id',
     '_ga','_gl','fbclid','igshid','gclid','gbraid','wbraid',
@@ -332,7 +316,6 @@ footer .footer-links a:hover{color:var(--green)}
     'ref','ref_src','ref_url','source','ss_source','ss_campaign'
   ];
 
-  /* ── Live Demo ── */
   const input = document.getElementById('demoInput');
   const btn = document.getElementById('demoBtn');
   const result = document.getElementById('demoResult');
@@ -359,7 +342,6 @@ footer .footer-links a:hover{color:var(--green)}
     }
   });
 
-  /* ── Fade-in on scroll (IntersectionObserver) ── */
   var faders = document.querySelectorAll('.fade-in');
   if('IntersectionObserver' in window){
     var obs = new IntersectionObserver(function(entries){
