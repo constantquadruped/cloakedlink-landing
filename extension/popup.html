@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+body {
+  width: 320px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #08080c;
+  color: #f3f4f6;
+  margin: 0;
+  padding: 16px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+.logo {
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.logo span {
+  color: #10b981;
+}
+.badge {
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
+  color: #9ca3af;
+}
+.badge.pro {
+  background: #8b5cf6;
+  color: #fff;
+}
+.stat-box {
+  background: #111122;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.stat-box h2 {
+  font-size: 2.2rem;
+  margin: 0;
+  color: #10b981;
+}
+.stat-box p {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  margin: 4px 0 0 0;
+}
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.toggle-label {
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #10b981;
+  color: #08080c;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+.btn-pro {
+  background: #8b5cf6;
+  color: #fff;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h3 class="logo">Cloaked<span>Link</span></h3>
+  <span id="tierBadge" class="badge">Free</span>
+</div>
+
+<div class="stat-box">
+  <h2 id="counter">0</h2>
+  <p>Trackers Stripped Globally</p>
+</div>
+
+<div class="toggle-row">
+  <span class="toggle-label">Auto-clean Link Ingest</span>
+  <input type="checkbox" id="autoClean" checked>
+</div>
+
+<div class="toggle-row">
+  <span class="toggle-label">Clipboard Sanitizer</span>
+  <input type="checkbox" id="clipboardClean">
+</div>
+
+<button id="actionBtn" class="btn">Go Pro ($1.99/mo)</button>
+
+<script src="popup.js"></script>
+</body>
+</html>
