@@ -108,10 +108,6 @@ nav .btn-nav{padding:8px 20px;font-size:.85rem;border-radius:30px}
 .b2b-card h4{font-size:1.1rem;margin-bottom:8px;color:var(--white)}
 .b2b-card p{color:var(--gray);font-size:.9rem}
 
-/* ── SPONSORS ── */
-.sponsor-box{max-width:600px;margin:0 auto;text-align:center;background:rgba(255,255,255,.01);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius);padding:40px}
-.sponsor-btn-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-
 /* ── FOOTER ── */
 footer{padding:60px 0;text-align:center;background:#050508}
 footer .footer-brand{font-weight:700;margin-bottom:8px;font-size:1.05rem}
@@ -131,9 +127,8 @@ footer .footer-links a:hover{color:var(--green)}
     <li><a href="#pro">Extensions (Pro)</a></li>
     <li><a href="#recs">Privacy Recommendations</a></li>
     <li><a href="#business">B2B Compliance</a></li>
-    <li><a href="#support">Support Us</a></li>
   </ul>
-  <a href="#pro" class="btn btn-primary btn-nav">Go Pro</a>
+  <a href="#pro" class="btn btn-primary btn-nav">Join Waitlist</a>
 </nav>
 
 <!-- HERO -->
@@ -142,8 +137,8 @@ footer .footer-links a:hover{color:var(--green)}
     <h1>Stop being tracked.<br>Start browsing <span>clean.</span></h1>
     <p class="subtitle">CloakedLink strips tracking parameters from every URL — automatically, privately, instantly.</p>
     <div class="cta-row">
-      <a href="#pro" class="btn btn-primary">Get CloakedLink Pro</a>
-      <a href="#demo" class="btn btn-outline">See it in action</a>
+      <a href="#demo" class="btn btn-primary">Try it free</a>
+      <a href="#pro" class="btn btn-outline">Join the waitlist</a>
     </div>
     
     <div class="waitlist-box">
@@ -181,7 +176,7 @@ footer .footer-links a:hover{color:var(--green)}
       <span class="badge-pro">Pro Feature Preview</span>
       <h3>Generate Secure Shortlinks</h3>
       <p>Clean URLs and pack them into temporary, non-tracking shortlinks (e.g. <code>clk.lnk/clean</code>) that keep your analytics clean and respect recipient privacy.</p>
-      <button class="btn btn-outline" style="padding:10px 24px;font-size:.9rem" onclick="alert('This premium feature is available in the Pro version!')">Try Shortlink Generator</button>
+      <button class="btn btn-outline" style="padding:10px 24px;font-size:.9rem" onclick="alert('The shortlink generator is a planned Pro feature — join the waitlist above for early access.')">Join the waitlist</button>
     </div>
   </div>
 </section>
@@ -202,7 +197,7 @@ footer .footer-links a:hover{color:var(--green)}
         <div class="price">$0 <span>forever</span></div>
         <ul>
           <li>Manual URL copy-paste cleaning</li>
-          <li>Free browser extension (Manifest V3)</li>
+          <li>Open-source MV3 extension (self-install; web stores soon)</li>
           <li>Cleans 50+ common ad trackers</li>
           <li>100% offline local processing</li>
         </ul>
@@ -212,7 +207,7 @@ footer .footer-links a:hover{color:var(--green)}
       <!-- Pro -->
       <div class="pricing-card premium fade-in">
         <h3>Pro Edition</h3>
-        <div class="price">$1.99 <span>/ month</span></div>
+        <div class="price">$1.99 <span>/ month · coming soon</span></div>
         <ul>
           <li><strong>Auto Clipboard Strip</strong> (Cleans copied links automatically)</li>
           <li><strong>Redirect Bypass</strong> (Skips intermediate tracker links)</li>
@@ -221,7 +216,7 @@ footer .footer-links a:hover{color:var(--green)}
           <li>Custom tracking parameter blocks</li>
           <li>Priority updates for new ad-trackers</li>
         </ul>
-        <button class="btn btn-primary" onclick="alert('Early access signup is active in the Hero section above!')">Unlock Pro Access</button>
+        <button class="btn btn-primary" onclick="window.scrollTo({top:0,behavior:'smooth'});var i=document.querySelector('.waitlist-box input');if(i)setTimeout(function(){i.focus()},400);">Join the waitlist</button>
       </div>
     </div>
   </div>
@@ -281,27 +276,8 @@ footer .footer-links a:hover{color:var(--green)}
       </div>
       <div class="fade-in" style="text-align:center">
         <h3>Need custom integrations?</h3>
-        <p style="color:var(--gray);margin-bottom:24px">We offer volume licensing, custom parametrizations, and SLA-backed support for compliance platforms.</p>
+        <p style="color:var(--gray);margin-bottom:24px">Volume licensing, custom parametrizations, and SLA-backed support for compliance platforms — currently in early access.</p>
         <a href="mailto:sales@cloakedlink.com" class="btn btn-primary">Contact Sales</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SPONSORS / PATRONAGE -->
-<section id="support">
-  <div class="container">
-    <div class="fade-in">
-      <p class="section-label">Support Open Source</p>
-      <h2 class="section-title">Keep the Project Running</h2>
-      <p class="section-sub">CloakedLink is committed to zero tracking. Help us fund hosting and development costs.</p>
-    </div>
-    
-    <div class="sponsor-box fade-in">
-      <p>If CloakedLink has saved you from tracker-bloated links, consider throwing a tip or sponsor our open-source codebase. Every donation goes directly towards keeping the serverless routing clean and free.</p>
-      <div class="sponsor-btn-row">
-        <a href="https://github.com/sponsors" class="btn btn-outline" style="border-color:#ea4aaa;color:#ea4aaa" target="_blank" rel="noopener">Sponsor on GitHub</a>
-        <a href="https://buymeacoffee.com" class="btn btn-outline" style="border-color:#ffdd00;color:#ffdd00" target="_blank" rel="noopener">Buy Me a Coffee</a>
       </div>
     </div>
   </div>
