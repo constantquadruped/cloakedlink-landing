@@ -5,11 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const tierBadgeEl = document.getElementById("tierBadge");
   const actionBtnEl = document.getElementById("actionBtn");
   const clipboardCleanEl = document.getElementById("clipboardClean");
-  
+  const autoCleanEl = document.getElementById("autoClean");
+
   // Load initial settings and statistics
-  chrome.storage.local.get(["countRemoved", "isPro"], (data) => {
+  chrome.storage.local.get(["countRemoved", "isPro", "autoClean"], (data) => {
     counterEl.textContent = data.countRemoved || 0;
-    
+    // Restore the saved auto-clean preference (defaults to on)
+    autoCleanEl.checked = data.autoClean !== false;
+
     if (data.isPro) {
       tierBadgeEl.textContent = "Pro";
       tierBadgeEl.className = "badge pro";
@@ -35,6 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   
+  // Persist the auto-clean preference locally
+  autoCleanEl.addEventListener("change", () => {
+    chrome.storage.local.set({ autoClean: autoCleanEl.checked });
+  });
+
   // Listen for checkbox changes
   clipboardCleanEl.addEventListener("change", (e) => {
     chrome.storage.local.get("isPro", (data) => {

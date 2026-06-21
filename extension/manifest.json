@@ -5,12 +5,7 @@
   "description": "Automatically strip UTM and tracking parameters from URLs privately in your browser.",
   "permissions": [
     "declarativeNetRequest",
-    "declarativeNetRequestFeedback",
-    "clipboardWrite",
     "storage"
-  ],
-  "host_permissions": [
-    "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js"

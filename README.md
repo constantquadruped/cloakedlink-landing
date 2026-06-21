@@ -1,6 +1,8 @@
 # 🛡️ CloakedLink
 
-**CloakedLink** is a privacy-first utility designed to automatically sanitize URLs and strip tracking/telemetry parameters (like Google `gclid`, Facebook `fbclid`, UTM tags, and 30+ others) before you visit or share them.
+**CloakedLink** is a privacy-first utility designed to automatically sanitize URLs and strip tracking/telemetry parameters (like Google `gclid`, Facebook `fbclid`, UTM tags, and 50+ others) before you visit or share them.
+
+All cleaning happens **on your device** — CloakedLink collects no data, sets no cookies, makes no network requests of its own, and has no analytics.
 
 The project consists of a sleek, modern landing page built with HTML/CSS/JS and a lightweight, high-performance browser extension.
 
@@ -11,13 +13,13 @@ The project consists of a sleek, modern landing page built with HTML/CSS/JS and 
 ### 💻 Web Platform
 - **Instant Cleaning**: Paste any link with tracking parameters and get a clean, shareable URL instantly.
 - **Privacy-Safe Recommendations**: Curated directory of privacy-respecting services (VPNs, Email, Search) without tracking cookies.
-- **Enterprise Scrubbing**: Built-in API endpoints for scrubbing CRM and outbound data pipelines.
+- **Enterprise Scrubbing** *(roadmap)*: Planned API endpoints for scrubbing CRM and outbound data pipelines.
 - **GitHub Sponsors / Patronage Integration**: Direct channels for community support and donations.
 
 ### 🧩 Browser Extension (Manifest V3)
 - **Zero Latency**: Powered by Chrome's native `declarativeNetRequest` engine, stripping parameters at the network level before pages even start loading.
-- **Live Counter**: Sleek dark-mode popup showing real-time statistics of trackers blocked.
-- **Pro Toggles**: Options to enable/disable clipboard monitoring and clean URLs in the background automatically.
+- **Live Counter**: Sleek dark-mode popup showing a local count of trackers stripped on your device (no data leaves the browser).
+- **Pro Toggles** *(roadmap)*: Planned options to enable/disable clipboard monitoring and background auto-cleaning.
 
 ---
 

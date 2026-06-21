@@ -4,7 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CloakedLink — Strip Tracking Parameters from URLs</title>
-<meta name="description" content="CloakedLink strips tracking parameters from every URL — automatically, privately, instantly. No data collected. Ever.">
+<meta name="description" content="CloakedLink strips tracking parameters (utm, fbclid, gclid and more) from every URL — automatically, privately, on your device. No data collected. Ever.">
+<link rel="canonical" href="https://cloakedlink.com/">
+<meta name="theme-color" content="#08080c">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cloakedlink.com/">
+<meta property="og:title" content="CloakedLink — Strip Tracking Parameters from URLs">
+<meta property="og:description" content="Strip tracking parameters from every URL — automatically, privately, on your device. No data collected. Ever.">
+<meta property="og:site_name" content="CloakedLink">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CloakedLink — Strip Tracking Parameters from URLs">
+<meta name="twitter:description" content="Strip tracking parameters from every URL — automatically, privately, on your device. No data collected. Ever.">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg-dark:#08080c;--bg-card:#111122;--bg-card-hover:#161630;--green:#10b981;--green-dim:#059669;--green-glow:rgba(16,185,129,0.15);--purple:#8b5cf6;--purple-glow:rgba(139,92,246,0.15);--white:#f3f4f6;--gray:#9ca3af;--radius:16px;--max-w:1200px}
@@ -135,7 +149,7 @@ footer .footer-links a:hover{color:var(--green)}
     <div class="waitlist-box">
       <h3>Join the Browser Extensions Pro Waitlist</h3>
       <form class="waitlist-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='You\'re on the list!';this.querySelector('button').disabled=true;this.querySelector('input').disabled=true;" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <input type="email" placeholder="your@email.com" required style="padding:12px 18px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:var(--white);font-size:.95rem;flex:1;min-width:200px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
+        <input type="email" placeholder="your@email.com" required aria-label="Email address for early access waitlist" autocomplete="email" style="padding:12px 18px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:var(--white);font-size:.95rem;flex:1;min-width:200px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='rgba(255,255,255,.15)'">
         <button type="submit" class="btn btn-primary" style="padding:12px 24px;font-size:.95rem">Get Early Access</button>
       </form>
       <p style="text-align:center;font-size:.75rem;color:var(--gray);margin-top:10px">Sign up for early Chrome, Safari, and Firefox extension builds.</p>
@@ -153,7 +167,7 @@ footer .footer-links a:hover{color:var(--green)}
     </div>
     <div class="demo-box fade-in">
       <div class="demo-input-wrap">
-        <input type="text" class="demo-input" id="demoInput" value="https://example.com/page?utm_source=facebook&fbclid=abc123&utm_campaign=spring_sale&gclid=xyz789" spellcheck="false">
+        <input type="text" class="demo-input" id="demoInput" aria-label="URL to clean" value="https://example.com/page?utm_source=facebook&fbclid=abc123&utm_campaign=spring_sale&gclid=xyz789" spellcheck="false">
       </div>
       <button class="demo-btn" id="demoBtn">Clean URL</button>
       <div class="demo-result" id="demoResult">
@@ -188,11 +202,11 @@ footer .footer-links a:hover{color:var(--green)}
         <div class="price">$0 <span>forever</span></div>
         <ul>
           <li>Manual URL copy-paste cleaning</li>
-          <li>Standard Bookmarklet support</li>
-          <li>Cleans 37 common ad trackers</li>
+          <li>Free browser extension (Manifest V3)</li>
+          <li>Cleans 50+ common ad trackers</li>
           <li>100% offline local processing</li>
         </ul>
-        <a href="#bookmarklet" class="btn btn-outline">Drag Bookmarklet</a>
+        <a href="#demo" class="btn btn-outline">Try the cleaner</a>
       </div>
       
       <!-- Pro -->
@@ -299,21 +313,29 @@ footer .footer-links a:hover{color:var(--green)}
     <p class="footer-brand">CloakedLink — Browse without a trace.</p>
     <p class="footer-copy">&copy; 2026 CloakedLink. All rights reserved. Everything runs locally in your browser.</p>
     <div class="footer-links">
-      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-      <a href="#privacy">Privacy Policy</a>
+      <a href="https://github.com/constantquadruped/cloakedlink-landing" target="_blank" rel="noopener">GitHub</a>
+      <a href="#privacy">Privacy</a>
     </div>
+    <p id="privacy" style="color:var(--gray);font-size:.78rem;max-width:560px;margin:24px auto 0;line-height:1.6">
+      <strong style="color:var(--white)">Privacy:</strong> CloakedLink collects no personal data, sets no cookies, and runs no analytics. URL cleaning happens entirely on your device — nothing you paste or visit is ever sent to a server.
+    </p>
   </div>
 </footer>
 
 <script>
 (function(){
+  // Mirrors the browser extension's declarativeNetRequest ruleset (extension/rules.json)
   const TRACKING_PARAMS = [
     'utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_id',
-    '_ga','_gl','fbclid','igshid','gclid','gbraid','wbraid',
+    'utm_name','utm_cid','utm_reader','utm_referrer',
+    'fbclid','gclid','dclid','gbraid','wbraid','gclsrc',
+    'igshid','igsh','msclkid','yclid','twclid','ttclid','li_fat_id',
+    'mc_cid','mc_eid','pk_campaign','pk_kwd','pk_source','pk_medium',
+    'piwik_campaign','piwik_kwd','matomo_campaign','matomo_kwd','s_kwcid',
+    '_ga','_gl','_hsenc','_hsmi',
     'hsa_acc','hsa_cam','hsa_grp','hsa_ad','hsa_src','hsa_tgt','hsa_kw','hsa_mt','hsa_net','hsa_ver',
-    'msclkid','s_kwcid','mc_cid','mc_eid',
-    'pk_campaign','pk_kwd','piwik_campaign','piwik_kwd',
-    'ref','ref_src','ref_url','source','ss_source','ss_campaign'
+    'vero_id','vero_conv','oly_anon_id','oly_enc_id','wickedid',
+    'ref_src','ref_url','spm','scm','_branch_match_id'
   ];
 
   const input = document.getElementById('demoInput');
