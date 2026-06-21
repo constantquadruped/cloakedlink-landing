@@ -14,7 +14,6 @@ The project consists of a sleek, modern landing page built with HTML/CSS/JS and 
 - **Instant Cleaning**: Paste any link with tracking parameters and get a clean, shareable URL instantly.
 - **Privacy-Safe Recommendations**: Curated directory of privacy-respecting services (VPNs, Email, Search) without tracking cookies.
 - **Enterprise Scrubbing** *(roadmap)*: Planned API endpoints for scrubbing CRM and outbound data pipelines.
-- **GitHub Sponsors / Patronage Integration**: Direct channels for community support and donations.
 
 ### 🧩 Browser Extension (Manifest V3)
 - **Zero Latency**: Powered by Chrome's native `declarativeNetRequest` engine, stripping parameters at the network level before pages even start loading.
